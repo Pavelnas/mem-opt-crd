@@ -1,24 +1,31 @@
-# README
+# Documentation
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# Getting Started
 
-Things you may want to cover:
+## Docker
 
-* Ruby version
+it’s really simple you need to have docker and docker-compose installed in order to be able to run the project you need to run the following command in order to have the application running.
 
-* System dependencies
+### X86
 
-* Configuration
+```bash
+$ docker-compose up --build
+```
 
-* Database creation
+### ARM or M1 chip
 
-* Database initialization
+```bash
+$ docker-compose -f docker-compose.m1.yml up --build
+```
 
-* How to run the test suite
+## On your machine
 
-* Services (job queues, cache servers, search engines, etc.)
+On your machine, you need to have the ruby `3.0.0` version installed or RVM for ruby virtual management.
 
-* Deployment instructions
+```bash
+$ bundle install
 
-* ...
+$ rails db:create db:migrate
+
+$ rails s
+```

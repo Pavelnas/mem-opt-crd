@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: mem-opt-api
+    process: web
+  name: mem-opt-web
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: mem-opt
+      process: web
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: mem-opt
+        process: web
+    spec:
+      containers:
+      - env:
+        - name: PORT
+          value: "3000"
+        - name: RAILS_ENV
+          value: production
+        image: AccountID.dkr.ecr.eu-north-1.amazonaws.com/mem-opt:latest
+        imagePullPolicy: IfNotPresent
+        name: mem-opt-web
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 10
+          timeoutSeconds: 2

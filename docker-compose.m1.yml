@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  web:
+    platform: linux/x86_64
+    build:
+      context: .
+      dockerfile: .docker/development/Dockerfile
+    volumes:
+      - .:/app
+    command: /bin/start.sh
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+    stdin_open: true
+    tty: true
